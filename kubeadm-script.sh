@@ -30,7 +30,7 @@ systemctl restart docker && systemctl enable docker
 systemctl  restart kubelet && systemctl enable kubelet
 kubeadm init --apiserver-advertise-address 192.168.0.100 --pod-network-cidr=192.168.0.0/24
 
--------------------------------------------------
+# Kubernetes Home directory and config 
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -48,16 +48,10 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$kubever"
 kubectl apply -f https://gist.githubusercontent.com/initcron/32ff89394c881414ea7ef7f4d3a1d499/raw/4863613585d05f9360321c7141cc32b8aa305605/kube-dashboard.yaml
 
 kubectl describe svc kubernetes-dashboard -n kube-system
-# take a note of the port that you get from the above command. and access the dashborad using the 
-following master-node-ip:31000
+# take a note of the port that you get from the above command. and access the dashborad using the  following master-node-ip:31000
+#http://192.168.0.100:31000
 
-http://192.168.0.100:31000
-==========================to reset kubeadm=======================
-to reset firewall run:
-iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 
-======================Node Join====================================
- kubeadm join 192.168.0.100:6443 --token 0tovnz.ghtl8idl03lurnec --discovery-token-ca-cert-hash sha256:85b3af74fa90dac2c14ad6ed6d4f83cea1c28e9fa5e439657e18d8c4572aca98
 
 
 
